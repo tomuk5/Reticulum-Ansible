@@ -1,5 +1,4 @@
 # Reticulum-Ansible
-Reticulum Ansible Role(s)
 
 An ansible role for [Reticulum](https://github.com/markqvist/Reticulum) on Debian 12 and supplemental applications:
 - [LXMF](https://github.com/markqvist/lxmf) (LXMD)

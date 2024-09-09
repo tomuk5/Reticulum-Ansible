@@ -10,3 +10,5 @@ Work in progress:
 
 Sensible defaults are provided for deploying a RNS gateway onto a Debian 12 based VM or server and joing the public testnet.
 Additonal roles like LXMF propagation and hosting content with NomadNet can be enabled as required.
+
+Requires Ansible Community version 10.2.0 or greater

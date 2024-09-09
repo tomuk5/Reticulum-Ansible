@@ -1,0 +1,24 @@
+---
+
+- name: apt-get clean
+  ansible.builtin.apt:
+    clean: yes
+
+- name: apt-get autoclean
+  ansible.builtin.apt:
+    autoclean: yes
+
+- name: restart rnsd
+  ansible.builtin.service: 
+    name: rnsd.service
+    state: restarted
+
+- name: restart lxmd
+  ansible.builtin.service: 
+    name: lxmd.service
+    state: restarted
+
+- name: restart nomadnet
+  ansible.builtin.service: 
+    name: nomadnet.service
+    state: restarted

@@ -2,12 +2,13 @@
 
 # example playbook file
 
-- hosts: reticulum-hosts
+- name: Reticulum Servers
+  hosts: reticulum-hosts
   roles:
 
     - role: deb12-reticulum
       tags: reticulum
 
     # example of using a single tagged part of the role
-    #- role: deb12-reticulum
-    #  tags: reticulum/rnsd
+    # - role: deb12-reticulum
+    #   tags: reticulum/rnsd

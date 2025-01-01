@@ -1,0 +1,56 @@
+---
+
+- name: Install/Upgrade RNS via PIP
+  ansible.builtin.pip:
+    name: rns
+    state: latest
+    break_system_packages: true
+  notify: Restart rnsd
+
+- name: Create RNSD Service account
+  ansible.builtin.user:
+    name: "{{ reticulum_rnsd_service_user }}"
+    comment: RNS Daemon
+    password: '!'
+    system: true
+    state: present
+    create_home: true
+    shell: /bin/bash
+    groups:
+      - dialout
+    append: true
+
+- name: Create Reticulum Config Directory
+  ansible.builtin.file:
+    path: "{{ reticulum_rnsd_config_path }}"
+    state: directory
+    owner: "{{ reticulum_rnsd_service_user }}"
+    group: "{{ reticulum_rnsd_service_user }}"
+    mode: '0755'
+
+- name: Create/Update Reticulum Config file
+  ansible.builtin.template:
+    src: "etc_reticulum_config.j2"
+    dest: "{{ reticulum_rnsd_config_path }}/config"
+    owner: "{{ reticulum_rnsd_service_user }}"
+    group: "{{ reticulum_rnsd_service_user }}"
+    mode: '0660'
+  notify: Restart rnsd
+
+- name: Create systemd service file for RNSD
+  ansible.builtin.template:
+    src: "systemd_rnsd.service.j2"
+    dest: "/etc/systemd/system/rnsd.service"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Force systemd to reread configs
+  ansible.builtin.systemd_service:
+    daemon_reload: true
+
+- name: Enable and Start RNSD service
+  ansible.builtin.systemd_service:
+    name: rnsd.service
+    state: started
+    enabled: true

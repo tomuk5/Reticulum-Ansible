@@ -1,0 +1,45 @@
+---
+
+- name: Install/Upgrade LXMF via PIP
+  ansible.builtin.pip:
+    name: lxmf
+    state: latest
+    break_system_packages: true
+  notify: Restart lxmd
+
+- name: Create LXMD Config Directory
+  ansible.builtin.file:
+    path: "{{ reticulum_lxmd_config_path }}"
+    state: directory
+    owner: "{{ reticulum_rnsd_service_user }}"
+    group: "{{ reticulum_rnsd_service_user }}"
+    mode: '0755'
+
+- name: Create/Update LXMD Config file
+  ansible.builtin.template:
+    src: "etc_lxmd_config.j2"
+    dest: "{{ reticulum_lxmd_config_path }}/config"
+    owner: "{{ reticulum_rnsd_service_user }}"
+    group: "{{ reticulum_rnsd_service_user }}"
+    mode: '0660'
+  notify: Restart lxmd
+
+# copy stored or generated indentity file for LXMD
+
+- name: Create systemd service file for LXMD
+  ansible.builtin.template:
+    src: "systemd_lxmd.service.j2"
+    dest: "/etc/systemd/system/lxmd.service"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Force systemd to reread configs
+  ansible.builtin.systemd_service:
+    daemon_reload: true
+
+- name: Enable and Start LXMD service
+  ansible.builtin.systemd_service:
+    name: lxmd.service
+    state: started
+    enabled: true

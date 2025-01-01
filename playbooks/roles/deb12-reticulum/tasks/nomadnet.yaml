@@ -1,0 +1,45 @@
+---
+
+- name: Install/Upgrade Nomad Network via PIP
+  ansible.builtin.pip:
+    name: nomadnet
+    state: latest
+    break_system_packages: true
+  notify: Restart nomadnet
+
+- name: Create NomadNet Config Directory
+  ansible.builtin.file:
+    path: "{{ reticulum_nomadnet_config_path }}"
+    state: directory
+    owner: "{{ reticulum_rnsd_service_user }}"
+    group: "{{ reticulum_rnsd_service_user }}"
+    mode: '0755'
+
+- name: Create/Update NomadNet Config file
+  ansible.builtin.template:
+    src: "etc_nomadnetwork_config.j2"
+    dest: "{{ reticulum_nomadnet_config_path }}/config"
+    owner: "{{ reticulum_rnsd_service_user }}"
+    group: "{{ reticulum_rnsd_service_user }}"
+    mode: '0660'
+  notify: Restart nomadnet
+
+# copy stored or generated identity file for LXMD
+
+- name: Create systemd service file for NomadNet
+  ansible.builtin.template:
+    src: "systemd_nomadnet.service.j2"
+    dest: "/etc/systemd/system/nomadnet.service"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Force systemd to reread configs
+  ansible.builtin.systemd_service:
+    daemon_reload: true
+
+- name: Enable and Start NomadNet service
+  ansible.builtin.systemd_service:
+    name: nomadnet.service
+    state: started
+    enabled: true

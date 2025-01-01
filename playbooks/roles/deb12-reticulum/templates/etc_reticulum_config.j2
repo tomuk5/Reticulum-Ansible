@@ -1,0 +1,107 @@
+[reticulum]
+
+  enable_transport = {{ reticulum_rnsd_enable_transport }}
+  share_instance = {{ reticulum_rnsd_share_instance }}
+  shared_instance_port = {{ reticulum_rnsd_shared_instance_port }}
+  instance_control_port = {{ reticulum_rnsd_instance_control_port }}
+  panic_on_interface_error = {{ reticulum_rnsd_panic_on_interface_error }}
+  respond_to_probes = {{ reticulum_rnsd_respond_to_probes }}
+
+
+[logging]
+
+loglevel =  {{ reticulum_rnsd_log_level }}
+
+
+[interfaces]
+
+{% for reticulum_rnsd_auto_interface in reticulum_rnsd_auto_interfaces if reticulum_rnsd_auto_interface.enabled is true %}
+  [[{{ reticulum_rnsd_auto_interface.name }}]]
+    type = AutoInterface
+    enabled = {{ reticulum_rnsd_auto_interface.enabled }}
+{% if reticulum_rnsd_auto_interface.bitrate is defined and reticulum_rnsd_auto_interface.bitrate is not none %}
+    bitrate = {{ reticulum_rnsd_auto_interface.bitrate }}
+{% endif %}
+{% endfor %}
+
+{% for reticulum_rnsd_rnode_interface in reticulum_rnsd_rnode_interfaces if reticulum_rnsd_rnode_interface.enabled is true %}
+  [[{{ reticulum_rnsd_rnode_interface.name }}]]
+    type = RNodeInterface
+    enabled = {{ reticulum_rnsd_rnode_interface.enabled }}
+    port = {{ reticulum_rnsd_rnode_interface.port }}
+    frequency = {{ reticulum_rnsd_rnode_interface.frequency }}
+    bandwidth = {{ reticulum_rnsd_rnode_interface.bandwidth }}
+    txpower = {{ reticulum_rnsd_rnode_interface.txpower }}
+    spreadingfactor = {{ reticulum_rnsd_rnode_interface.spreadingfactor }}
+    codingrate = {{ reticulum_rnsd_rnode_interface.codingrate }}
+{% if reticulum_rnsd_rnode_interface.flow_control is defined and reticulum_rnsd_rnode_interface.flow_control is not none %}
+    flow_control = {{ reticulum_rnsd_rnode_interface.flow_control }}
+{% endif %}
+{% if reticulum_rnsd_rnode_interface.mode is defined and reticulum_rnsd_rnode_interface.mode| length >0 %}
+    mode = {{ reticulum_rnsd_rnode_interface.mode }}
+{% endif %}
+{% endfor %}
+
+{% for reticulum_rnsd_rnode_multiinterface in reticulum_rnsd_rnode_multiinterfaces if reticulum_rnsd_rnode_multiinterface.enabled is true %}
+  [[{{ reticulum_rnsd_rnode_multiinterface.name }}]]
+    type = RNodeMultiInterface
+    enabled = {{ reticulum_rnsd_rnode_multiinterface.enabled }}
+    port = {{ reticulum_rnsd_rnode_multiinterface.port }}
+  {% for reticulum_rnsd_rnode_subinterface in reticulum_rnsd_rnode_multiinterface.subinterfaces if reticulum_rnsd_rnode_subinterface.enabled is true %}
+
+    [[{{ reticulum_rnsd_rnode_subinterface.name }}]]
+      frequency = {{ reticulum_rnsd_rnode_subinterface.frequency }}
+      bandwidth = {{ reticulum_rnsd_rnode_subinterface.bandwidth }}
+      txpower = {{ reticulum_rnsd_rnode_subinterface.txpower }}
+      vport = {{ reticulum_rnsd_rnode_subinterface.vport }}
+      spreadingfactor = {{ reticulum_rnsd_rnode_subinterface.spreadingfactor }}
+      codingrate = {{ reticulum_rnsd_rnode_subinterface.codingrate }}
+  {% if reticulum_rnsd_rnode_subinterface.mode is defined and reticulum_rnsd_rnode_subinterface.mode| length >0 %}
+      mode = {{ reticulum_rnsd_rnode_subinterface.mode }}
+  {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% for reticulum_rnsd_udp_server in reticulum_rnsd_udp_servers if reticulum_rnsd_udp_server.enabled is true %}
+  [[{{ reticulum_rnsd_udp_server.name }}]]
+    type = UDPInterface
+    enabled = {{ reticulum_rnsd_udp_server.enabled }}
+    listen_ip = {{ reticulum_rnsd_udp_server.listen_ip }}
+    listen_port = {{ reticulum_rnsd_udp_server.listen_port }}
+    forward_ip = {{ reticulum_rnsd_udp_server.forward_ip }}
+    forward_port = {{ reticulum_rnsd_udp_server.forward_port }}
+{% if reticulum_rnsd_udp_server.device is defined and reticulum_rnsd_udp_server.device| length >0 %}
+    device = {{ reticulum_rnsd_udp_server.device }}
+{% endif %}
+{% if reticulum_rnsd_udp_server.port is defined and reticulum_rnsd_udp_server.port| length >0 %}
+    port = {{ reticulum_rnsd_udp_server.port }}
+{% endif %}
+
+{% endfor %}
+{% for reticulum_rnsd_tcp_server in reticulum_rnsd_tcp_servers if reticulum_rnsd_tcp_server.enabled is true %}
+  [[{{ reticulum_rnsd_tcp_server.name }}]]
+    type = TCPServerInterface
+    enabled = {{ reticulum_rnsd_tcp_server.enabled }}
+    listen_ip = {{ reticulum_rnsd_tcp_server.listen_ip }}
+    listen_port = {{ reticulum_rnsd_tcp_server.listen_port }}
+    bitrate = {{ reticulum_rnsd_tcp_server.bitrate }}
+    mode = {{ reticulum_rnsd_tcp_server.mode }}
+{% if reticulum_rnsd_tcp_server.device is defined and reticulum_rnsd_tcp_server.device| length >0 %}
+    device = {{ reticulum_rnsd_tcp_server.device }}
+{% endif %}
+{% if reticulum_rnsd_tcp_server.port is defined and reticulum_rnsd_tcp_server.port| length >0 %}
+    port = {{ reticulum_rnsd_tcp_server.port }}
+{% endif %}
+
+{% endfor %}
+{% for reticulum_rnsd_tcp_client in reticulum_rnsd_tcp_clients if reticulum_rnsd_tcp_client.enabled is true %}
+  [[{{ reticulum_rnsd_tcp_client.name }}]]
+    type = TCPClientInterface
+    interface_enabled = {{ reticulum_rnsd_tcp_client.enabled }}
+    target_host = {{ reticulum_rnsd_tcp_client.target_host }}
+    target_port = {{ reticulum_rnsd_tcp_client.target_port }}
+{% if reticulum_rnsd_tcp_client.mode is defined and reticulum_rnsd_tcp_client.mode| length >0 %}
+    mode = {{ reticulum_rnsd_tcp_client.mode }}
+{% endif %}
+
+{% endfor %}

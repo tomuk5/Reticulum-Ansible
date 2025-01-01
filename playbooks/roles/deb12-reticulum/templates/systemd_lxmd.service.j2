@@ -1,0 +1,14 @@
+[Unit]
+Description=Lightweight Extensible Message Format Daemon
+After=multi-user.target
+BindsTo=rnsd.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+User={{ reticulum_rnsd_service_user }}
+ExecStart=lxmd --service --config "{{ reticulum_lxmd_config_path }}" --rnsconfig "{{ reticulum_rnsd_config_path }}"
+
+[Install]
+WantedBy=multi-user.target

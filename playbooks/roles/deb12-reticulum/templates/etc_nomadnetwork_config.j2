@@ -1,0 +1,57 @@
+#
+# This configuration is controlled by Ansible - do NOT edit by hand.
+#
+
+[logging]
+
+loglevel = {{ reticulum_nomadnet_logging_loglevel }}
+destination = file
+logfile = {{ reticulum_nomadnet_config_path }}/logfile
+
+[client]
+
+enable_client = {{ reticulum_nomadnet_client_enable_client }}
+user_interface = text
+downloads_path = {{ reticulum_nomadnet_client_downloads_path }}
+notify_on_new_message = {{ reticulum_nomadnet_client_notify_on_new_message }}
+announce_at_start = {{ reticulum_nomadnet_client_announce_at_start }}
+try_propagation_on_send_fail = {{ reticulum_nomadnet_client_try_propagation_on_send_fail }}
+periodic_lxmf_sync = {{ reticulum_nomadnet_client_periodic_lxmf_sync }}
+lxmf_sync_interval = {{ reticulum_nomadnet_client_lxmf_sync_interval }}
+lxmf_sync_limit = {{ reticulum_nomadnet_client_lxmf_sync_limit }}
+max_accepted_size = {{ reticulum_nomadnet_client_max_accepted_size }}
+compact_announce_stream = {{ reticulum_nomadnet_client_compact_announce_stream }}
+
+
+[textui]
+
+intro_time = {{ reticulum_nomadnet_textui_intro_time }}
+theme = {{ reticulum_nomadnet_textui_theme }}
+colormode = {{ reticulum_nomadnet_textui_colormode }}
+glyphs = {{ reticulum_nomadnet_textui_glyphs }}
+mouse_enabled = {{ reticulum_nomadnet_textui_mouse_enabled }}
+editor = {{ reticulum_nomadnet_textui_editor }}
+hide_guide = {{ reticulum_nomadnet_textui_hide_guide }}
+
+
+[node]
+
+enable_node = {{ reticulum_nomadnet_node_enable_node }}
+node_name = {{ reticulum_nomadnet_node_node_name }}
+announce_interval = {{ reticulum_nomadnet_node_announce_interval }}
+announce_at_start = {{ reticulum_nomadnet_node_announce_at_start }}
+{% if reticulum_nomadnet_node_disable_propagation is defined %}
+disable_propagation = {{ reticulum_nomadnet_node_disable_propagation }}
+{% endif %}
+message_storage_limit = {{ reticulum_nomadnet_node_message_storage_limit }}
+max_transfer_size = {{ reticulum_nomadnet_node_max_transfer_size }}
+{% if reticulum_nomadnet_node_prioritise_destinations is defined %}
+prioritise_destinations = {{ reticulum_nomadnet_node_prioritise_destinations }}
+{% endif %}
+page_refresh_interval = {{ reticulum_nomadnet_node_page_refresh_interval }}
+file_refresh_interval = {{ reticulum_nomadnet_node_file_refresh_interval }}
+
+[printing]
+
+print_messages = {{ reticulum_nomadnet_printing_print_messages }}
+print_command = {{ reticulum_nomadnet_printing_print_command }}

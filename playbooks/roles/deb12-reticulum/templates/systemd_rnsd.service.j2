@@ -1,0 +1,13 @@
+[Unit]
+Description=Reticulum Network Stack Daemon
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+User={{ reticulum_rnsd_service_user }}
+ExecStart=rnsd --service
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,26 @@
+[propagation]
+
+enable_node = {{ reticulum_lxmd_propagation_enabled }}
+announce_interval = {{ reticulum_lxmd_propagation_announce_interval }}
+announce_at_start = {{ reticulum_lxmd_propagation_announce_at_start }}
+autopeer = {{ reticulum_lxmd_propagation_autopeer }}
+autopeer_maxdepth = {{ reticulum_lxmd_propagation_autopeer_maxdepth }}
+propagation_transfer_max_accepted_size = {{ reticulum_lxmd_propagation_transfer_max_accepted_size }}
+auth_required = {{ reticulum_lxmd_propagation_auth_required }}
+message_storage_limit = {{ reticulum_lxmd_propagation_message_storage_limit }}
+
+[lxmf]
+
+display_name = {{ reticulum_lxmd_lxmf_display_name }}
+announce_at_start = {{ reticulum_lxmd_lxmf_announce_at_start }}
+{% if reticulum_lxmd_lxmf_announce_at_start is true and reticulum_lxmd_lxmf_announce_interval_minutes is defined %}
+announce_interval = {{ reticulum_lxmd_lxmf_announce_interval_minutes }}
+{% endif %}
+delivery_transfer_max_accepted_size = {{ reticulum_lxmd_lxmf_delivery_transfer_max_accepted_size }}
+{% if reticulum_lxmd_lxmf_on_inbound_enabled is true and reticulum_lxmd_lxmf_on_inbound_command is defined %}
+on_inbound = {{ reticulum_lxmd_lxmf_on_inbound_command }}
+{% endif %}
+
+[logging]
+
+loglevel = {{ reticulum_lxmd_logging_loglevel }}

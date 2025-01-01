@@ -1,0 +1,34 @@
+---
+
+reticulum_rnsd_enabled: true
+reticulum_rnsd_enable_transport: true
+reticulum_rnsd_respond_to_probes: true
+reticulum_rnsd_log_level: 5
+
+reticulum_rnsd_auto_interfaces:
+  - name: "Default Interface"
+    enabled: true
+    bitrate: 100000000   # 100mbit
+
+reticulum_rnsd_rnode_interfaces:
+  - name: "PontyPandy West Rnode"
+    enabled: true
+    port: "/dev/ttyUSB0"
+    frequency: 867500000 # 867.5Mhz
+    bandwidth: 125000    # 125Khz
+    txpower: 22          # 150mw
+    spreadingfactor: 9
+    codingrate: 5
+    flow_control: true
+    mode: "gateway"
+
+reticulum_rnsd_tcp_clients:
+  - name: "Fireman Sams Server"
+    enabled: true
+    target_host: "firemansam.example.com"
+    target_port: "4242"
+    mode: "boundary"
+
+reticulum_lxmd_enabled: false
+
+reticulum_nomadnet_enabled: false

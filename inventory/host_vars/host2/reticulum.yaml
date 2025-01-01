@@ -1,0 +1,60 @@
+---
+
+reticulum_rnsd_enabled: true
+reticulum_rnsd_enable_transport: true
+reticulum_rnsd_respond_to_probes: true
+reticulum_rnsd_log_level: 3
+
+reticulum_rnsd_auto_interfaces:
+  - name: "Default Interface"
+    enabled: false
+
+reticulum_rnsd_tcp_servers:
+  - name: "TCP Server Interface"
+    enabled: true
+    listen_ip: 0.0.0.0
+    listen_port: 4242
+    bitrate: "100000000"  # 100mbit
+    mode: "gateway"
+
+reticulum_rnsd_tcp_clients:
+  - name: "RNS Amsterdam testnet"
+    enabled: true
+    target_host: "amsterdam.connect.reticulum.network"
+    target_port: "4965"
+    mode: "full"
+  - name: "RNS Dublin testnet"
+    enabled: true
+    target_host: "dublin.connect.reticulum.network"
+    target_port: "4965"
+    mode: "full"
+  - name: "RNS Sideband"
+    enabled: true
+    target_host: "sideband.connect.reticulum.network"
+    target_port: "7822"
+    mode: "full"
+  - name: "RNS BetweenTheBorders testnet"
+    enabled: false
+    target_host: "reticulum.betweentheborders.com"
+    target_port: "4242"
+    mode: "full"
+
+reticulum_lxmd_enabled: true
+reticulum_lxmd_propagation_enabled: true
+reticulum_lxmd_propagation_autopeer_maxdepth: 8
+reticulum_lxmd_propagation_message_storage_limit: 3000
+
+reticulum_lxmd_lxmf_display_name: "PontyPandy Testnet"
+reticulum_lxmd_lxmf_announce_at_start: false
+reticulum_lxmd_lxmf_announce_interval_enabled: false
+reticulum_lxmd_lxmf_on_inbound_enabled: true
+
+reticulum_nomadnet_enabled: true
+reticulum_nomadnet_client_enable_client: false
+reticulum_nomadnet_client_announce_at_start: false
+reticulum_nomadnet_node_enable_node: true
+reticulum_nomadnet_node_node_name: "PontyPandy Testnet"
+reticulum_nomadnet_node_announce_at_start: true
+reticulum_nomadnet_node_disable_propagation: true
+reticulum_nomadnet_node_page_refresh_interval: 5
+reticulum_nomadnet_node_file_refresh_interval: 5

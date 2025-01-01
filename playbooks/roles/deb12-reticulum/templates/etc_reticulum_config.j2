@@ -22,8 +22,8 @@ loglevel =  {{ reticulum_rnsd_log_level }}
 {% if reticulum_rnsd_auto_interface.bitrate is defined and reticulum_rnsd_auto_interface.bitrate is not none %}
     bitrate = {{ reticulum_rnsd_auto_interface.bitrate }}
 {% endif %}
-{% endfor %}
 
+{% endfor %}
 {% for reticulum_rnsd_rnode_interface in reticulum_rnsd_rnode_interfaces if reticulum_rnsd_rnode_interface.enabled is true %}
   [[{{ reticulum_rnsd_rnode_interface.name }}]]
     type = RNodeInterface
@@ -40,8 +40,8 @@ loglevel =  {{ reticulum_rnsd_log_level }}
 {% if reticulum_rnsd_rnode_interface.mode is defined and reticulum_rnsd_rnode_interface.mode| length >0 %}
     mode = {{ reticulum_rnsd_rnode_interface.mode }}
 {% endif %}
-{% endfor %}
 
+{% endfor %}
 {% for reticulum_rnsd_rnode_multiinterface in reticulum_rnsd_rnode_multiinterfaces if reticulum_rnsd_rnode_multiinterface.enabled is true %}
   [[{{ reticulum_rnsd_rnode_multiinterface.name }}]]
     type = RNodeMultiInterface
@@ -60,8 +60,8 @@ loglevel =  {{ reticulum_rnsd_log_level }}
       mode = {{ reticulum_rnsd_rnode_subinterface.mode }}
   {% endif %}
   {% endfor %}
-{% endfor %}
 
+{% endfor %}
 {% for reticulum_rnsd_udp_server in reticulum_rnsd_udp_servers if reticulum_rnsd_udp_server.enabled is true %}
   [[{{ reticulum_rnsd_udp_server.name }}]]
     type = UDPInterface
@@ -100,6 +100,9 @@ loglevel =  {{ reticulum_rnsd_log_level }}
     interface_enabled = {{ reticulum_rnsd_tcp_client.enabled }}
     target_host = {{ reticulum_rnsd_tcp_client.target_host }}
     target_port = {{ reticulum_rnsd_tcp_client.target_port }}
+{% if reticulum_rnsd_tcp_client.bitrate is defined and reticulum_rnsd_tcp_client.bitrate is not none %}
+    bitrate = {{ reticulum_rnsd_tcp_client.bitrate }}
+{% endif %}
 {% if reticulum_rnsd_tcp_client.mode is defined and reticulum_rnsd_tcp_client.mode| length >0 %}
     mode = {{ reticulum_rnsd_tcp_client.mode }}
 {% endif %}

@@ -8,7 +8,7 @@ Work in progress:
 - [MeshChat](https://github.com/liamcottle/reticulum-meshchat)
 - [Sideband](https://github.com/markqvist/Sideband/)
 
-Defaults are provided based on the packaged defaults for RNSD, a selection of public servers enabled and the AutoInterface enabled.
+Defaults are provided based on the packaged defaults for RNSD, a selection of public TCP servers enabled and the AutoInterface enabled.
 
 Additonal roles like LXMF propagation and hosting content with NomadNet can be enabled as required.
 

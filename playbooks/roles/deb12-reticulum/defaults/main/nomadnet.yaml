@@ -1,0 +1,38 @@
+---
+
+reticulum_nomadnet_enabled: false
+reticulum_nomadnet_config_path: "/etc/nomadnetwork"
+reticulum_nomadnet_logging_loglevel: 4
+
+reticulum_nomadnet_client_enable_client: true
+reticulum_nomadnet_client_downloads_path: "~/Downloads"
+reticulum_nomadnet_client_notify_on_new_message: true
+reticulum_nomadnet_client_announce_at_start: true
+reticulum_nomadnet_client_try_propagation_on_send_fail: true
+reticulum_nomadnet_client_periodic_lxmf_sync: true
+reticulum_nomadnet_client_lxmf_sync_interval: 360
+reticulum_nomadnet_client_lxmf_sync_limit: 8
+reticulum_nomadnet_client_max_accepted_size: 500
+reticulum_nomadnet_client_compact_announce_stream: true
+
+reticulum_nomadnet_textui_intro_time: 1
+reticulum_nomadnet_textui_theme: "dark"
+reticulum_nomadnet_textui_colormode: 256
+reticulum_nomadnet_textui_glyphs: "unicode"
+reticulum_nomadnet_textui_mouse_enabled: "True"
+reticulum_nomadnet_textui_editor: "nano"
+reticulum_nomadnet_textui_hide_guide: false
+
+reticulum_nomadnet_node_enable_node: false
+reticulum_nomadnet_node_node_name: "None"
+reticulum_nomadnet_node_announce_interval: 360
+reticulum_nomadnet_node_announce_at_start: false
+# reticulum_nomadnet_node_disable_propagation: yes
+reticulum_nomadnet_node_message_storage_limit: 2000
+reticulum_nomadnet_node_max_transfer_size: 256
+# reticulum_nomadnet_node_prioritise_destinations: "41d20c727598a3fbbdf9106133a3a0ed, d924b81822ca24e68e2effea99bcb8cf"
+reticulum_nomadnet_node_page_refresh_interval: 0
+reticulum_nomadnet_node_file_refresh_interval: 0
+
+reticulum_nomadnet_printing_print_messages: false
+reticulum_nomadnet_printing_print_command: "lp"

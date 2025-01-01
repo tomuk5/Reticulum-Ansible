@@ -1,0 +1,107 @@
+---
+
+reticulum_rnsd_enabled: false
+reticulum_rnsd_config_path: "/etc/reticulum"
+reticulum_rnsd_service_user: "rnsd"
+
+reticulum_rnsd_enable_transport: false
+reticulum_rnsd_share_instance: true
+reticulum_rnsd_shared_instance_port: "37428"
+reticulum_rnsd_instance_control_port: "37429"
+reticulum_rnsd_panic_on_interface_error: false
+reticulum_rnsd_respond_to_probes: false
+reticulum_rnsd_log_level: 4
+
+reticulum_rnsd_auto_interfaces:
+  - name: "Default Interface"
+    enabled: true
+    bitrate: ""
+    mode: ""
+
+reticulum_rnsd_rnode_interfaces:
+  - name: "RNode LoRa Interface"
+    enabled: false
+    port: "/dev/ttyUSB0"
+    frequency: 867500000 # 867.5Mhz
+    bandwidth: 125000    # 125Khz
+    txpower: 17          # 50mw
+    spreadingfactor: 9
+    codingrate: 5
+    flow_control: false
+    mode: ""
+
+reticulum_rnsd_rnode_multiinterfaces:
+  - name: "RNode Multi Interface"
+    enabled: false
+    port: "/dev/ttyACM0"
+    subinterfaces:
+      - name: "Low Datarate"
+        enabled: false
+        frequency: 867500000 # 867.5Mhz
+        bandwidth: 125000    # 125Khz
+        txpower: 17          # 50mw
+        vport: 0
+        spreadingfactor: 9
+        codingrate: 5
+        mode: ""
+      - name: "High Datarate"
+        enabled: false
+        frequency: 2400000000 # 2.4Ghz
+        bandwidth: 1625000    # 1625Khz
+        txpower: 0            # 0.12mw
+        vport: 1
+        spreadingfactor: 5
+        codingrate: 5
+        mode: ""
+
+reticulum_rnsd_udp_servers:
+  - name: "UDPInterface"
+    enabled: false
+    listen_ip: 0.0.0.0
+    listen_port: 4242
+    forward_ip: 255.255.255.255
+    forward_port: 4242
+    device: ""
+    port: ""
+
+reticulum_rnsd_tcp_servers:
+  - name: "TCP Server Interface"
+    enabled: false
+    listen_ip: 0.0.0.0
+    listen_port: 4242
+    bitrate: 10000000  # 10mbit
+    mode: "full"
+    device: ""
+    port: ""
+
+reticulum_rnsd_tcp_clients:
+  - name: "RNS Amsterdam testnet"
+    enabled: false
+    target_host: "amsterdam.connect.reticulum.network"
+    target_port: "4965"
+    mode: ""
+  - name: "RNS Dublin testnet"
+    enabled: false
+    target_host: "dublin.connect.reticulum.network"
+    target_port: "4965"
+    mode: ""
+  - name: "RNS Sideband"
+    enabled: false
+    target_host: "sideband.connect.reticulum.network"
+    target_port: "7822"
+    mode: ""
+  - name: "RNS BetweenTheBorders testnet"
+    enabled: false
+    target_host: "reticulum.betweentheborders.com"
+    target_port: "4242"
+    mode: ""
+  - name: "Beleth RNS Hub"
+    enabled: false
+    target_host: "rns.beleth.net"
+    target_port: "4242"
+    mode: ""
+  - name: "RNS h.acked.co.uk"
+    enabled: false
+    target_host: "rns.h.acked.co.uk"
+    target_port: "4242"
+    mode: ""

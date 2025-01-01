@@ -1,0 +1,8 @@
+---
+
+reticulum-hosts:
+  hosts:
+    host1:
+      ansible_host: 192.168.1.1
+    host2:
+      ansible_host: example.com

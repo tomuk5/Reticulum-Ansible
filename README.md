@@ -13,3 +13,10 @@ Defaults are provided based on the packaged defaults for RNSD, a selection of pu
 Additonal roles like LXMF propagation and hosting content with NomadNet can be enabled as required.
 
 Requires Ansible Community version 10.2.0 or greater
+
+
+To-do:
+- Add all additional/remaining Interface configuration settings per [Configuring Interfaces](https://reticulum.network/manual/interfaces.html#)
+- Add Meshchat (find a nice way to build/cross compile for low powered platforms/VM's on the ansible server-side prior to install)
+- Allow static selection of package version in group/host vars to allow pinning to a version other than "latest"
+- Improve documentation in repo and provide more examples/explanation
